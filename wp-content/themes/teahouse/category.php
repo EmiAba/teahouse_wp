@@ -10,7 +10,7 @@
         <div class="row g-4">
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
-                    <div class="col-lg-4 col-md-6">
+                <div id="post-id-<?php the_ID(); ?>" <?php post_class("col-lg-4 col-md-6 d-flex align-items-stretch");?>>
                         <div class="card border-0 shadow-sm">
                             <?php if (has_post_thumbnail()) : ?>
 

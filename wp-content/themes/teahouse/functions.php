@@ -5,37 +5,40 @@ add_theme_support('post-thumbnails');
 
 add_post_type_support('excerpt', array());
 
-
-
-
-/* display latest articles */
+/**
+ * Function that display the latest articles
+ *
+ * @param integer $number_of_posts
+ * @return void
+ */
 function display_latest_articles($number_of_posts=5){
 
 include 'latest-articles.php';
 
 }
 
-
-
-
-/* carousedl  */
-/* function initialize_carousel_script() {
-    ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            $('.carousel').carousel({
-                interval: 3000, // Auto-slide every 3 seconds
-                wrap: true      // Enable looping of slides
-            });
-        });
-    </script>
-    <?php
+/**
+ * Adding one more class to the body for extra customization*
+ *
+ * @param [type] $classes
+ * @return void
+ */ 
+function teahouse_body_class($classes) {
+      $classes[] = 'teahouse-custom-class';
+    
+    return $classes;
 }
-add_action('wp_footer', 'initialize_carousel_script');
+add_filter('body_class', 'teahouse_body_class');
 
-
-function enqueue_bootstrap_and_jquery() {
-    wp_enqueue_script('jquery');
-    wp_enqueue_script('bootstrap-carousel', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js', array('jquery'), null, true);
+/**
+ * This is the the function that registers menu
+ *
+ * @return void
+ */
+ 
+function teahouse_register_menus() {
+  register_nav_menus(array(
+      'header-menu' => __('Header Menu', 'teahouse'),
+  ));
 }
-add_action('wp_enqueue_scripts', 'enqueue_bootstrap_and_jquery'); */
+add_action('init', 'teahouse_register_menus');
