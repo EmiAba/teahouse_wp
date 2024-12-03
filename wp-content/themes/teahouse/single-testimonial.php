@@ -31,7 +31,7 @@
 
                 <!-- Display Testimonial Content -->
                 <blockquote class="blockquote border-start border-3 border-primary ps-3">
-                    <p class="mb-4"><?php the_content(); ?></p>
+                    <p class="mb-4"><?php echo do_shortcode(get_the_content()); ?></p>
                 </blockquote>
 
                 <!-- Display Rating -->
