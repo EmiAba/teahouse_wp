@@ -14,3 +14,4 @@
 
 require 'includes/cpt-products.php';
 require 'includes/cpt-testimonial.php';
+require 'includes/func.php';
