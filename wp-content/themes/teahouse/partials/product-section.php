@@ -3,20 +3,20 @@
     <div class="container py-5">
         <div class="section-title text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
             <p class="fs-5 fw-medium fst-italic text-primary">Our Products</p>
-            <h1 class="display-6">Tea has a complex positive effect on the body</h1>
+            <h1 class="display-6">Buy or Taste – Enjoy Tea Your Way</h1>
         </div>
         <div class="owl-carousel product-carousel wow fadeInUp" data-wow-delay="0.5s">
             <?php
             $args = array(
                 'post_type' => 'product',
-                'posts_per_page' => -1, // Adjust the number of products displayed
+                'posts_per_page' => -1, 
             );
             $query = new WP_Query($args);
             if ($query->have_posts()) :
                 while ($query->have_posts()) : $query->the_post();
 
-                    // Get the product description
-                    $description = get_the_excerpt() ?: 'No description available'; // Fallback for empty excerpt
+                
+                    $description = get_the_excerpt() ?: 'No description available'; 
             ?>
                     <a href="<?php the_permalink(); ?>" class="d-block product-item rounded">
                         <div class="product-background" style="height: 300px; border-radius: 8px;">

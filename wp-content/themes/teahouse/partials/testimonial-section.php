@@ -21,14 +21,15 @@
                     $company = get_post_meta(get_the_ID(), 'client_company', true);
             ?>
                     <div class="testimonial-item p-4 p-lg-5">
-                        <!-- Shortened Content -->
                         <p class="mb-4">
                             <?php echo wp_trim_words(get_the_content(), 20, '...'); ?>
                             <a href="<?php the_permalink(); ?>" class="text-primary">Read More</a>
                         </p>
                         <div class="d-flex align-items-center justify-content-center">
                             <?php if (has_post_thumbnail()) : ?>
-                                <img class="img-fluid flex-shrink-0" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'); ?>" alt="<?php the_title(); ?>" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;">
+                                <a href="<?php the_permalink(); ?>">
+                                    <img class="img-fluid flex-shrink-0" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'thumbnail'); ?>" alt="<?php the_title(); ?>" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;">
+                                </a>
                             <?php else : ?>
                                 <img class="img-fluid flex-shrink-0" src="<?php echo get_stylesheet_directory_uri(); ?>/img/default-avatar.png" alt="Default Avatar" style="border-radius: 50%; width: 70px; height: 70px; object-fit: cover;">
                             <?php endif; ?>
