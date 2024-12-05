@@ -1,7 +1,7 @@
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-5">
-            <!-- Image Section -->
+         
             <div class="col-lg-6">
                 <div class="row g-3">
                     <div class="col-6 text-end">
@@ -15,9 +15,9 @@
                 </div>
             </div>
 
-            <!-- Text Section -->
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <div class="section-title">
+                    
                     <p class="fs-5 fw-medium fst-italic text-primary"><?php echo esc_html(get_theme_mod('about_subtitle')); ?></p>
                     <h1 class="display-6"><?php echo esc_html(get_theme_mod('about_title')); ?></h1>
                 </div>
@@ -35,7 +35,7 @@
                     <div class="col-sm-8">
                         <h5><?php echo esc_html(get_theme_mod('about_section2_title')); ?></h5>
                         <p class="mb-0"><?php echo esc_html(get_theme_mod('about_section2_text')); ?></p>
-                        <!-- Visit Button Below the Text -->
+                       
                         <div class="mt-3">
                             <a href="<?php echo site_url('/about-us'); ?>" class="btn btn-primary btn-lg">See Us</a>
                         </div>

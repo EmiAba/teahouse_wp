@@ -61,7 +61,7 @@ function teahouse_register_menus() {
 }
 add_action('after_setup_theme', 'teahouse_register_menus', 0);
 
-require_once get_template_directory() . '/templates/class-wp-bootstrap-navwalker.php';
+ require_once get_template_directory() . '/templates/class-wp-bootstrap-navwalker.php'; 
 
 /**
  * This is the the function that registers Sidebar
@@ -154,7 +154,7 @@ function customize_about_section($wp_customize) {
       'type' => 'text',
   ));
 
-  //Section 1
+
   $wp_customize->add_setting('about_section1_title', array(
       'default' => 'Our tea is one of the most popular drinks in the world',
   ));
@@ -172,7 +172,7 @@ function customize_about_section($wp_customize) {
       'type' => 'textarea',
   ));
 
-  // Section 2
+ 
   $wp_customize->add_setting('about_section2_title', array(
       'default' => 'Daily use of a cup of tea is good for your health',
   ));
@@ -219,29 +219,29 @@ function customize_tea_house_section($wp_customize) {
       'priority' => 30,
   ));
 
-  // Add Settings and Controls for Titles, Subtitles, Text, and Images
+  
   $fields = [
-      // Header Section
+      
       ['tea_house_title', 'Main Title', 'Welcome to Our Tea House'],
       ['tea_house_subtitle', 'Subtitle', 'A cozy retreat where you can savor the finest teas and relax with friends.'],
 
-      // About Section
+   
       ['about_title', 'About Title', 'Our Story'],
       ['about_paragraph1', 'About Paragraph 1', 'Nestled in the heart of the city, our Tea House is a haven for tea enthusiasts.'],
       ['about_paragraph2', 'About Paragraph 2', 'We source our teas from the finest gardens worldwide, ensuring every sip is a journey of flavors and aromas.'],
       ['about_paragraph3', 'About Paragraph 3', 'Our tea house is more than just a place to drink tea – it’s a community where everyone is welcome to relax, unwind, and discover the beauty of tea culture.'],
 
-      // Services Section
+    
       ['services_title', 'Services Title', 'What We Offer'],
       ['service1', 'Service 1', 'Enjoy a cup of freshly brewed tea at our tables.'],
       ['service2', 'Service 2', 'Take home a selection of our finest teas.'],
       ['service3', 'Service 3', 'Host tea parties or gatherings at our venue.'],
 
-      // Featured Teas Section
+  
       ['featured_title', 'Featured Teas Title', 'Discover Our Teas'],
       ['featured_subtitle', 'Featured Teas Subtitle', 'A curated selection of the world’s finest teas awaits you.'],
 
-      // Individual Teas
+    
       ['tea1_title', 'Tea 1 Title', 'Black Tea'],
       ['tea1_description', 'Tea 1 Description', 'A bold and robust flavor, perfect for any time of day.'],
       ['tea2_title', 'Tea 2 Title', 'Green Tea'],
@@ -263,7 +263,7 @@ function customize_tea_house_section($wp_customize) {
       ]);
   }
 
-  // Add Image Fields
+
   $image_fields = [
     'about_img1' => '/img/tea-house-interior.jpg',
     'service_img1' => '/img/tea-service.jpg',
@@ -285,4 +285,172 @@ function customize_tea_house_section($wp_customize) {
   }
 }
 add_action('customize_register', 'customize_tea_house_section');
+/**
+ * function that deals with Menu Page
+ *
+ * @param [type] $wp_customize
+ * @return void
+ */
+function teahouse_customize_menu_with_categories($wp_customize) {
+    
+    $wp_customize->add_section('full_menu_section', array(
+        'title' => 'Full Menu Settings',
+        'priority' => 35,
+    ));
+
+    $wp_customize->add_setting('menu_page_title', ['default' => 'Our Full Menu']);
+    $wp_customize->add_setting('menu_page_subtitle', ['default' => 'Explore our wide selection of teas, treats, and beverages.']);
+    $wp_customize->add_control('menu_page_title', ['label' => 'Menu Page Title', 'section' => 'full_menu_section', 'type' => 'text']);
+    $wp_customize->add_control('menu_page_subtitle', ['label' => 'Menu Page Subtitle', 'section' => 'full_menu_section', 'type' => 'text']);
+
+   
+    for ($i = 1; $i <= 5; $i++) {
+        $wp_customize->add_setting("tea_category_title_$i", ['default' => "Tea Category $i"]);
+        $wp_customize->add_control("tea_category_title_$i", [
+            'label' => "Tea Category $i Title",
+            'section' => 'full_menu_section',
+            'type' => 'text'
+        ]);
+
+        for ($j = 1; $j <= 4; $j++) {
+            $wp_customize->add_setting("tea_img_{$i}_{$j}", ['default' => get_stylesheet_directory_uri() . "/img/default-tea.jpg"]);
+            $wp_customize->add_setting("tea_title_{$i}_{$j}", ['default' => "Tea $j"]);
+            $wp_customize->add_setting("tea_description_{$i}_{$j}", ['default' => "Description for Tea $j"]);
+            $wp_customize->add_setting("tea_price_{$i}_{$j}", ['default' => "$5.00"]);
+
+            $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "tea_img_{$i}_{$j}", [
+                'label' => "Tea $j Image (Category $i)",
+                'section' => 'full_menu_section',
+            ]));
+            $wp_customize->add_control("tea_title_{$i}_{$j}", [
+                'label' => "Tea $j Title (Category $i)",
+                'section' => 'full_menu_section',
+                'type' => 'text'
+            ]);
+            $wp_customize->add_control("tea_description_{$i}_{$j}", [
+                'label' => "Tea $j Description (Category $i)",
+                'section' => 'full_menu_section',
+                'type' => 'textarea'
+            ]);
+            $wp_customize->add_control("tea_price_{$i}_{$j}", [
+                'label' => "Tea $j Price (Category $i)",
+                'section' => 'full_menu_section',
+                'type' => 'text'
+            ]);
+        }
+    }
+
+    $wp_customize->add_setting('salty_cakes_title', ['default' => 'Salty Cakes']);
+    $wp_customize->add_control('salty_cakes_title', ['label' => 'Salty Cakes Title', 'section' => 'full_menu_section', 'type' => 'text']);
+
+    for ($i = 1; $i <= 3; $i++) {
+        $wp_customize->add_setting("salty_cake_img_$i", ['default' => get_stylesheet_directory_uri() . "/img/default-salty-cake.jpg"]);
+        $wp_customize->add_setting("salty_cake_title_$i", ['default' => "Salty Cake $i"]);
+        $wp_customize->add_setting("salty_cake_price_$i", ['default' => "$3.50"]);
+
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "salty_cake_img_$i", [
+            'label' => "Salty Cake $i Image",
+            'section' => 'full_menu_section',
+        ]));
+        $wp_customize->add_control("salty_cake_title_$i", ['label' => "Salty Cake $i Title", 'section' => 'full_menu_section', 'type' => 'text']);
+        $wp_customize->add_control("salty_cake_price_$i", ['label' => "Salty Cake $i Price", 'section' => 'full_menu_section', 'type' => 'text']);
+    }
+
+   
+    $wp_customize->add_setting('cookies_cakes_title', ['default' => 'Cookies and Cakes']);
+    $wp_customize->add_control('cookies_cakes_title', ['label' => 'Cookies and Cakes Title', 'section' => 'full_menu_section', 'type' => 'text']);
+
+    for ($i = 1; $i <= 3; $i++) {
+        $wp_customize->add_setting("cookie_cake_img_$i", ['default' => get_stylesheet_directory_uri() . "/img/default-cookie-cake.jpg"]);
+        $wp_customize->add_setting("cookie_cake_title_$i", ['default' => "Cookie or Cake $i"]);
+        $wp_customize->add_setting("cookie_cake_price_$i", ['default' => "$2.50"]);
+
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "cookie_cake_img_$i", [
+            'label' => "Cookie or Cake $i Image",
+            'section' => 'full_menu_section',
+        ]));
+        $wp_customize->add_control("cookie_cake_title_$i", ['label' => "Cookie or Cake $i Title", 'section' => 'full_menu_section', 'type' => 'text']);
+        $wp_customize->add_control("cookie_cake_price_$i", ['label' => "Cookie or Cake $i Price", 'section' => 'full_menu_section', 'type' => 'text']);
+    }
+
+   
+    $wp_customize->add_setting('soft_drinks_title', ['default' => 'Soft Drinks']);
+    $wp_customize->add_control('soft_drinks_title', ['label' => 'Soft Drinks Title', 'section' => 'full_menu_section', 'type' => 'text']);
+
+    for ($i = 1; $i <= 16; $i++) {
+        $wp_customize->add_setting("soft_drink_title_$i", ['default' => "Soft Drink $i"]);
+        $wp_customize->add_setting("soft_drink_price_$i", ['default' => "$1.50"]);
+
+        $wp_customize->add_control("soft_drink_title_$i", ['label' => "Soft Drink $i Title", 'section' => 'full_menu_section', 'type' => 'text']);
+        $wp_customize->add_control("soft_drink_price_$i", ['label' => "Soft Drink $i Price", 'section' => 'full_menu_section', 'type' => 'text']);
+    }
+
+   
+    $wp_customize->add_setting('buy_tea_img', ['default' => get_stylesheet_directory_uri() . '/img/buy-tea.jpg']);
+    $wp_customize->add_setting('buy_tea_title', ['default' => 'Take Your Favorite Tea Home!']);
+    $wp_customize->add_setting('buy_tea_description', ['default' => 'Choose from our premium collection of teas and enjoy them wherever you like.']);
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'buy_tea_img', [
+        'label' => 'Buy Tea Image',
+        'section' => 'full_menu_section',
+    ]));
+    $wp_customize->add_control('buy_tea_title', ['label' => 'Buy Tea Title', 'section' => 'full_menu_section', 'type' => 'text']);
+    $wp_customize->add_control('buy_tea_description', ['label' => 'Buy Tea Description', 'section' => 'full_menu_section', 'type' => 'textarea']);
+}
+
+add_action('customize_register', 'teahouse_customize_menu_with_categories');
+
+
+/**
+ * function that  play video on Home Page
+ *
+ * @param [type] $wp_customize
+ * @return void
+ */
+function teahouse_customize_video_section($wp_customize) {
+    // Add a Section
+    $wp_customize->add_section('video_section', array(
+        'title'    => __('Video Section', 'theme-text-domain'),
+        'priority' => 30,
+    ));
+
+ 
+    $wp_customize->add_setting('video_headline', array(
+        'default'           => 'Tea is a drink of <span class="text-white">health</span> and <span class="text-white">beauty</span>',
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('video_headline', array(
+        'label'    => __('Headline', 'theme-text-domain'),
+        'section'  => 'video_section',
+        'type'     => 'textarea',
+    ));
+
+   
+    $wp_customize->add_setting('video_subheadline', array(
+        'default'           => 'Tea has been celebrated for centuries as a drink of health and beauty.',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('video_subheadline', array(
+        'label'    => __('Subheadline', 'theme-text-domain'),
+        'section'  => 'video_section',
+        'type'     => 'textarea',
+    ));
+
+
+    $wp_customize->add_setting('video_id', array(
+        'default'           => 'oqRUv07V6GI',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('video_id', array(
+        'label'       => __('YouTube Video ID', 'theme-text-domain'),
+        'section'     => 'video_section',
+        'type'        => 'text',
+        'description' => __('Enter the YouTube video ID. Example: oqRUv07V6GI', 'theme-text-domain'),
+    ));
+}
+add_action('customize_register', 'teahouse_customize_video_section');
+
+
+
+
 

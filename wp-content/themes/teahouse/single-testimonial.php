@@ -1,9 +1,15 @@
 <?php get_header(); ?>
+<!-- ACF plugin usage -->
+<?php 
+$id = get_the_ID();
+$testimonial_email = get_field('author_email', $id);
+$testimonial_location = get_field('author_location', $id);
+?>
 
 <!-- Single Testimonial Page -->
 <div class="container-xxl py-5">
     <div class="container">
-        <!-- Testimonial Details Section -->
+     
         <div class="row g-4 align-items-center">
             <div class="col-lg-5">
                 <?php if (has_post_thumbnail()) : ?>
@@ -15,7 +21,7 @@
             <div class="col-lg-7">
                 <p class="fs-2 fw-medium fst-italic text-primary"><?php the_title(); ?></p>
                 
-                <!-- Display Profession and Company -->
+            
                 <p class="text-muted">
                     <?php 
                     $profession = get_post_meta(get_the_ID(), 'client_profession', true); 
@@ -25,32 +31,27 @@
                         <strong>Profession:</strong> <?php echo esc_html($profession); ?><br>
                     <?php endif; ?>
                     <?php if ($company) : ?>
-                        <strong>Company:</strong> <?php echo esc_html($company); ?>
+                        <strong>Company:</strong> <?php echo esc_html($company); ?><br>
+                    <?php endif; ?>
+                    <?php if ($testimonial_email) : ?>
+                        <strong>Email:</strong> <?php echo esc_html($testimonial_email); ?><br>
+                    <?php endif; ?>
+                    <?php if ($testimonial_location) : ?>
+                        <strong>Location:</strong> <?php echo esc_html($testimonial_location); ?>
                     <?php endif; ?>
                 </p>
 
-                <!-- Display Testimonial Content -->
+         
                 <blockquote class="blockquote border-start border-3 border-primary ps-3">
                     <p class="mb-4"><?php echo do_shortcode(get_the_content()); ?></p>
                 </blockquote>
 
-                <!-- Display Rating -->
-                <?php 
-                $rating = get_post_meta(get_the_ID(), 'testimonial_rating', true);
-                if ($rating) : ?>
-                    <p><strong>Rating:</strong> 
-                        <?php for ($i = 0; $i < $rating; $i++) : ?>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        <?php endfor; ?>
-                    </p>
-                <?php endif; ?>
-
-                <!-- Display Date -->
+               
                 <p class="text-muted"><small><strong>Testimonial Date:</strong> <?php echo get_the_date(); ?></small></p>
             </div>
         </div>
 
-        <!-- Related Testimonials Section -->
+ 
         <div class="container py-5 mt-5">
             <h2 class="text-center mb-4">More Testimonials</h2>
             <div class="row">

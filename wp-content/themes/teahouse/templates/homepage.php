@@ -21,10 +21,7 @@
 <!-- Products Start -->
 <?php get_template_part( 'partials/product', 'section');  ?>
 
-
-
 <!-- Products End -->
-
 
 <!-- Article Start -->
 <?php get_template_part( 'partials/articles', 'section');  ?>
@@ -33,16 +30,6 @@
 <!-- Video Start -->
 <?php get_template_part( 'partials/video', 'section');  ?>
 <!-- Video End -->
-
-
-<!-- Video Modal Start -->
-<?php get_template_part( 'partials/videomodal', 'section');  ?>
-<!-- Video Modal End -->
-
-
-<!-- Store Start -->
-<?php get_template_part( 'partials/store', 'section');  ?>
-<!-- Store End -->
 
 
 <!-- Testimonial Start -->

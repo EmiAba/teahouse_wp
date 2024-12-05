@@ -1,5 +1,5 @@
 <?php
-// Number of posts for "Latest Articles"
+
 $number_of_posts = 5;
 
 
@@ -12,14 +12,14 @@ $query = new WP_Query($args);
 
 <div class="container-xxl py-5">
     <div class="container">
-        <!-- Section Title -->
+     
         <div class="section-title text-center mx-auto mb-5">
             <p class="fs-5 fw-medium fst-italic text-primary">Articles</p>
             <h1 class="display-6">Current & Recent News</h1>
         </div>
 
         <div class="row g-4">
-            <!-- Current Article (First Post) -->
+         
             <div class="col-lg-8 wow fadeIn" data-wow-delay="0.1s">
                 <?php if ($query->have_posts()) : ?>
                     <?php $query->the_post();  ?>
@@ -31,12 +31,12 @@ $query = new WP_Query($args);
                         <p class="mb-4">
                             <?php echo wp_trim_words(get_the_excerpt(), 30, ' <a href="' . get_the_permalink() . '">[...]</a>'); ?>
                         </p>
-                        <a href="<?php the_permalink(); ?>" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
+                        <a href="<?php echo site_url('/articles'); ?>" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
                     </div>
                 <?php endif; ?>
             </div>
 
-            <!-- Latest Articles (Remaining Posts) -->
+           
             <div class="col-lg-4 wow fadeIn" data-wow-delay="0.3s">
                 <div class="recent-articles">
                     <?php if ($query->have_posts()) : ?>
