@@ -1,8 +1,10 @@
 <?php
 
 /**
- * This is the assets function where we'll enqueue our scripts and styles
+ * Enqueue scripts and styles for the plugin.
  *
+ *
+ * @return void
  */
 
 function teahouse_plugin_enqueue_assets() {
@@ -22,8 +24,9 @@ function teahouse_plugin_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'teahouse_plugin_enqueue_assets');
 
 /**
- * This is our dynamic function that handles the AJAX Upvote
+ * Handles the AJAX Upvote functionality for products.
  *
+ * *
  * @return void
  */
 function teahouse_product_upvote(){
@@ -52,42 +55,65 @@ add_action('wp_ajax_teahouse_product_upvote', 'teahouse_product_upvote');
 
 
 /**
- * This is the callback function to display a product title with a shortcode
+ * This is the callback functions to display a phone number, address, email with shortcode
  *
  * @param [type] $atts
  * @return void
  */
-function display_product_title($atts)
-{
+function teahouse_contact_info_shortcode($atts) {
+  
+     $phone_number = '+012 345 67890'; 
+     $address = '123 Street, New York, USA'; 
+     $email = 'info@gmail.com'; 
+     
 
-     $atts = shortcode_atts(array(
-          'id' => 'id',
-          'show_image' => '',
-     ), $atts, 'bartag');
-
-     if (! empty($atts['id'])) {
-          $title = get_the_title($atts['id']);
+     $atts = shortcode_atts(
+         array(
+             'type' => 'all', 
+         ),
+         $atts
+     );
+ 
+  
+     switch ($atts['type']) {
+         case 'phone':
+             return esc_html($phone_number); 
+         case 'address':
+             return esc_html($address); 
+         case 'email':
+             return esc_html($email); 
+         default: 
+             return esc_html("Address: $address\nPhone: $phone_number\nEmail: $email");
      }
+ }
+ add_shortcode('contact_info', 'teahouse_contact_info_shortcode');
 
-     if (! empty($atts['show_image'])) {
-          $image = get_the_post_thumbnail_url($atts['id']);
-     }
 
-     $content = '<div class="shortcode-class">';
+/**
+ * Functions that show special offer
+ *
+ * @return void
+ */
+function special_offers_settings() {
+    
+    add_option('show_special_offers', 1); 
+    register_setting('general', 'show_special_offers');
 
-     if (! empty($title)) {
-          $content .= $title;
-     }
 
-     if (! empty($image)) {
-          $content .= '<img src="' . $image . '">';
-     }
-
-     $content .= '</div>';
-
-     return $content;
+    add_settings_field(
+        'show_special_offers',
+        'Show Special Offers',
+        function () {
+        
+            echo '<input type="checkbox" name="show_special_offers" value="1" ' . checked(1, get_option('show_special_offers', 1), false) . '>';
+        },
+        'general'
+    );
 }
-add_shortcode('display_product_title', 'display_product_title');
+add_action('admin_init', 'special_offers_settings');
 
+
+ 
+ 
 
 
