@@ -11,9 +11,6 @@
 <!-- About Start -->
 
 <?php get_template_part( 'partials/about', 'section');  ?>
-
-
-
 <!-- About End -->
 
 
@@ -30,7 +27,6 @@
 <!-- Video Start -->
 <?php get_template_part( 'partials/video', 'section');  ?>
 <!-- Video End -->
-
 
 <!-- Testimonial Start -->
 <?php get_template_part( 'partials/testimonial', 'section');  ?>

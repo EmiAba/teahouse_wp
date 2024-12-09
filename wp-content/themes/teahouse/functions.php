@@ -11,15 +11,113 @@ add_post_type_support('excerpt', array());
  *Function that enqueue styles and scripts for the theme.
  */
 function teahouse_enqueue_assets() {
-   wp_enqueue_style('teahouse-style', get_stylesheet_directory_uri() . '/style.css', array(), '1.0.0');
- 
- /*  wp_enqueue_script('teahouse-js', get_stylesheet_directory_uri() . '/js/custom-script.js', 
-      array('jquery'),  '1.0.0',   true ); */
- 
+    
+    wp_enqueue_style(
+        'bootstrap-css',
+        get_stylesheet_directory_uri() . '/css/bootstrap.min.css',
+        array(), 
+        '5.0.0'
+    );
+
+   
+    wp_enqueue_style(
+        'teahouse-style', 
+        get_stylesheet_directory_uri() . '/css//style.css', 
+        array(), 
+        '1.0.1'
+    );
+
+    wp_enqueue_style(
+        'font-awesome', 
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css', 
+        array(), 
+        null
+    );
+
+    wp_enqueue_style(
+        'bootstrap-icons', 
+        'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css', 
+        array(), 
+        null
+    );
+
+    wp_enqueue_style(
+        'animate-css',
+        get_stylesheet_directory_uri() . '/lib/animate/animate.min.css',
+        array(),
+        null
+    );
+
+    wp_enqueue_style(
+        'owl-carousel',
+        get_stylesheet_directory_uri() . '/lib/owlcarousel/assets/owl.carousel.min.css',
+        array(),
+        null
+    );
+
+   
+    wp_enqueue_script('jquery');
+
+    wp_enqueue_script(
+        'bootstrap-bundle', 
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js', 
+        array('jquery'), 
+        '5.0.0', 
+        true
+    );
+
+    wp_enqueue_script(
+        'wow-js', 
+        get_stylesheet_directory_uri() . '/lib/wow/wow.min.js', 
+        array(), 
+        null, 
+        true
+    );
+
+    wp_enqueue_script(
+        'easing-js', 
+        get_stylesheet_directory_uri() . '/lib/easing/easing.min.js', 
+        array('jquery'), 
+        null, 
+        true
+    );
+
+    wp_enqueue_script(
+        'waypoints-js', 
+        get_stylesheet_directory_uri() . '/lib/waypoints/waypoints.min.js', 
+        array('jquery'), 
+        null, 
+        true
+    );
+
+    wp_enqueue_script(
+        'owl-carousel', 
+        get_stylesheet_directory_uri() . '/lib/owlcarousel/owl.carousel.min.js', 
+        array('jquery'), 
+        null, 
+        true
+    );
+
+    wp_enqueue_script(
+        'main-js', 
+        get_stylesheet_directory_uri() . '/js/main.js', 
+        array('jquery', 'bootstrap-bundle', 'wow-js', 'easing-js', 'waypoints-js', 'owl-carousel'), 
+        '1.0.0', 
+        true
+    );
+
+
+    wp_enqueue_script(
+        'print-js', 
+        get_stylesheet_directory_uri() . '/js/print.js', 
+        array('jquery'), 
+        null, 
+        true
+    );
 }
-
-
 add_action('wp_enqueue_scripts', 'teahouse_enqueue_assets');
+
+
 
 /**
  * Function that display the latest articles
@@ -61,7 +159,7 @@ function teahouse_register_menus() {
 }
 add_action('after_setup_theme', 'teahouse_register_menus', 0);
 
- require_once get_template_directory() . '/templates/class-wp-bootstrap-navwalker.php'; 
+
 
 /**
  * This is the the function that registers Sidebar
@@ -449,6 +547,64 @@ function teahouse_customize_video_section($wp_customize) {
     ));
 }
 add_action('customize_register', 'teahouse_customize_video_section');
+
+/**
+ * function for customizing the copyright in the footer
+ *
+ * @param [type] $wp_customize
+ * @return void
+ */
+function footer_copyright_customizer($wp_customize) {
+    // Add a section for the copyright settings
+    $wp_customize->add_section('footer_copyright_section', array(
+        'title'    => __('Footer Copyright', 'teahouse'),
+        'priority' => 120,
+    ));
+
+    // Add setting for the site name
+    $wp_customize->add_setting('footer_site_name', array(
+        'default'           => __('Your Site Name', 'teahouse'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    // Add control for the site name
+    $wp_customize->add_control('footer_site_name_control', array(
+        'label'    => __('Site Name', 'teahouse'),
+        'section'  => 'footer_copyright_section',
+        'settings' => 'footer_site_name',
+        'type'     => 'text',
+    ));
+
+    // Add setting for the footer year
+    $wp_customize->add_setting('footer_year', array(
+        'default'           => date('Y'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    // Add control for the footer year
+    $wp_customize->add_control('footer_year_control', array(
+        'label'    => __('Year', 'teahouse'),
+        'section'  => 'footer_copyright_section',
+        'settings' => 'footer_year',
+        'type'     => 'text',
+    ));
+
+    // Add setting for the attribution text
+    $wp_customize->add_setting('footer_attribution', array(
+        'default'           => __('Designed by <a href="https://htmlcodex.com">HTML Codex</a>', 'teahouse'),
+        'sanitize_callback' => 'wp_kses_post', // Allows safe HTML tags
+    ));
+
+    // Add control for the attribution text
+    $wp_customize->add_control('footer_attribution_control', array(
+        'label'    => __('Attribution Text', 'teahouse'),
+        'section'  => 'footer_copyright_section',
+        'settings' => 'footer_attribution',
+        'type'     => 'textarea',
+    ));
+}
+add_action('customize_register', 'footer_copyright_customizer');
+
 
 
 

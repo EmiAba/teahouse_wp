@@ -16,6 +16,8 @@
             <div class="col-lg-7 wow fadeIn" data-wow-delay="0.5s">
                 <p class="fs-2 fw-medium fst-italic text-primary"><?php echo get_the_title(); ?></p>
                 <p class="mb-4"><?php echo get_the_content(); ?></p>
+                <button id="printBtn" class="btn btn-outline-primary" >Print This Article</button>
+                
             </div>
         </div>
     </div>

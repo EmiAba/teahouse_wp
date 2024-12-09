@@ -3,10 +3,10 @@
 <!-- Latest Blog Section Start -->
 <section id="latest-article-blog" class="py-4" style="background-color: #f8fdf4;"> 
     <div class="container py-4">
-        <!-- Section Header -->
+       
         <p class="fs-2 fw-bold mb-3" style="color: #88B44E; font-weight: 900; text-align: left;"><?php echo get_the_archive_title(); ?></p> <!-- Reduced margin-bottom -->
         <p><?php the_archive_description(); ?></p>
-        <!-- Article Posts -->
+    
         <div class="row g-4">
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
@@ -48,7 +48,6 @@
             <?php endif; ?>
         </div>
 
-        <!-- Pagination -->
         <div class="row mt-5">
             <div class="col">
                 <nav class="d-flex justify-content-left">

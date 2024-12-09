@@ -3,12 +3,12 @@
 <!-- Latest Blog Section Start -->
 <section id="latest-article-blog" class="py-4" style="background-color: #f8fdf4;"> 
     <div class="container py-4">
-        <!-- Section Header -->
+    
         <p class="fs-2 fw-bold mb-3" style="color: #88B44E; font-weight: 900; text-align: left;"><?php echo get_the_archive_title(); ?></p> <!-- Reduced margin-bottom -->
         <div>
             <?php echo get_the_author_meta('description');  ?>
         </div>
-        <!-- Article Posts -->
+        
         <div class="row g-4">
             <?php if (have_posts()) : ?>
                 <?php while (have_posts()) : the_post(); ?>
