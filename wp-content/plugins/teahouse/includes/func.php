@@ -89,28 +89,6 @@ function teahouse_contact_info_shortcode($atts) {
  add_shortcode('contact_info', 'teahouse_contact_info_shortcode');
 
 
-/**
- * Functions that show special offer
- *
- * @return void
- */
-function special_offers_settings() {
-    
-    add_option('show_special_offers', 1); 
-    register_setting('general', 'show_special_offers');
-
-
-    add_settings_field(
-        'show_special_offers',
-        'Show Special Offers',
-        function () {
-        
-            echo '<input type="checkbox" name="show_special_offers" value="1" ' . checked(1, get_option('show_special_offers', 1), false) . '>';
-        },
-        'general'
-    );
-}
-add_action('admin_init', 'special_offers_settings');
 
 
  

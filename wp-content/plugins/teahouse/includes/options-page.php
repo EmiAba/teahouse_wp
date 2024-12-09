@@ -3,10 +3,10 @@
  * Generated Option Page
  */
 
-// Hook to add the options page
+
 add_action('admin_menu', 'special_offers_add_admin_page');
 
-// Register the settings
+
 add_action('admin_init', 'special_offers_register_settings');
 
 /**
@@ -94,9 +94,9 @@ function special_offers_render_page() {
  * Modify the query to hide articles older than the specified time limit
  */
 add_action('pre_get_posts', function ($query) {
-    // Check if it's the main query, on the homepage, and not in the admin
+
     if (!is_admin() && $query->is_main_query() && $query->is_home()) {
-        $time_limit_days = get_option('article_time_limit_days', 30); // Default to 30 days
+        $time_limit_days = get_option('article_time_limit_days', 30); 
         $date_query = [
             [
                 'column' => 'post_date',

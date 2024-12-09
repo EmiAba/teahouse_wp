@@ -5,7 +5,7 @@
  */
 
  if ( !defined ( 'TEAHOUSE_PLUGIN_VERSION' ) ){
-    define( 'TEAHOUSE_PLUGIN_VERSION', '0.1' );
+    define( 'TEAHOUSE_PLUGIN_VERSION', '1.0.3' );
  }
 
  if ( !defined ('TEAHOUSE_PLUGIN_ASSETS_URL' ) ){
@@ -15,3 +15,4 @@
 require 'includes/cpt-products.php';
 require 'includes/cpt-testimonial.php';
 require 'includes/func.php';
+require 'includes/options-page.php';

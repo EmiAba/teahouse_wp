@@ -1,4 +1,4 @@
-jQuery(document).ready(function ($) {
+ jQuery(document).ready(function ($) {
     $('.like-button').on('click', function (e) {
         e.preventDefault();
 
@@ -26,15 +26,11 @@ jQuery(document).ready(function ($) {
             },
         });
     });
+
+
+
 });
 
-/* tea script menu */
 
-/*     function openTeaMenu() {
-        document.getElementById("teaMenu").style.display = "block";
-    }
 
-    function closeTeaMenu() {
-        document.getElementById("teaMenu").style.display = "none";
-    } */
 
